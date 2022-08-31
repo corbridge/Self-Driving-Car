@@ -29,4 +29,19 @@ flat_array[2] = 1000
 
 b = np.arange(9)
 b.shape = [3,3]
-print(b.transpose)
+# print(b.transpose)
+
+mat_a = np.matrix([0, 3, 5, 5, 5,2]).reshape(2,3)
+mat_b = np.matrix([3,4,3,-2,4,-2]).reshape(3,2)
+
+# print(mat_a * mat_b)
+
+c = np.arange(4).reshape(2,2)
+d = np.arange(4,8).reshape(2,2)
+# print(d)
+
+e = np.hstack((c,d))
+# print(e)
+
+f = np.concatenate((c,d),axis=1)
+print(f)
