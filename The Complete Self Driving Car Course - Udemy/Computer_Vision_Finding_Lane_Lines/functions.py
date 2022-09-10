@@ -13,4 +13,5 @@ def region_of_interest(image):
     triangule = np.array([(200, height),(1100, height), (550,250)], dtype=np.int64)
     mask = np.zeros_like(image)
     cv2.fillPoly(mask, [triangule], 255)
-    return mask
+    masked_image = cv2.bitwise_and(image, mask)
+    return masked_image
