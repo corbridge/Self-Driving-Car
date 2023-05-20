@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import requests
 import keyboard
+import os
 
 cap = cv2.VideoCapture("http://192.168.1.14:81/stream") 
 comando=0
