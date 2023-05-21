@@ -1,19 +1,20 @@
 import cv2
+import numpy as np
 
 cap = cv2.VideoCapture(0) 
 
 while True:
     ret, frame = cap.read()
     if not ret: break # break if no next frame
-
-    # Filtrado del video
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    gray_blur = cv2.GaussianBlur(gray, (5,5), 0)
-    _, thresh = cv2.threshold(gray_blur, 150, 255, cv2.THRESH_BINARY_INV)
+    
+    # Threshold
+    lower = np.array([0, 0, 0])
+    higher = np.array([50, 50, 50])
+    mask = cv2.inRange(frame, lower, higher)
 
     # Detectando la línea
-    contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    cv2.drawContours(frame, contours, -1, (0, 0, 255), 10)
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    cv2.drawContours(frame, contours, -1, [255,0,0], 10)
 
     # Encontrando el punto medio de la línea
     biggest_contour = max(contours, key = cv2.contourArea)
@@ -36,8 +37,8 @@ while True:
     cv2.putText(frame, f"Distancia: {distancia} px", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA)
     
     # Muestra el video en pantalla
-    cv2.imshow('frame', frame)
-    cv2.imshow("THRESH", thresh)
+    cv2.imshow('Frame', frame)
+    cv2.imshow("Mask", mask)
 
     # Salir del bucle while
     if cv2.waitKey(1) & 0xFF == ord('q'): # on press of q break
@@ -45,6 +46,3 @@ while True:
         
 cap.release()
 cv2.destroyAllWindows()
-
-for key, value in M.items():
-        print(f'{key}: {value}')
