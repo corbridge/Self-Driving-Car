@@ -3,6 +3,8 @@ import numpy as np
 
 cap = cv2.VideoCapture(0) 
 
+
+
 while True:
     ret, frame = cap.read()
     if not ret: break # break if no next frame
