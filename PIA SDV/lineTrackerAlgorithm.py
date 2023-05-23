@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-def get_error(frame):
+def distance_from_center(frame):
     frame = cv2.GaussianBlur(frame, (5,5), 0)
 
     # Threshold

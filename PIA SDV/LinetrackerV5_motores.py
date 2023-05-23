@@ -3,8 +3,6 @@ import numpy as np
 
 cap = cv2.VideoCapture(0) 
 
-
-
 while True:
     ret, frame = cap.read()
     if not ret: break # break if no next frame
@@ -13,7 +11,7 @@ while True:
 
     # Threshold
     lower = np.array([0, 0, 0])
-    higher = np.array([80, 80, 80])
+    higher = np.array([80, 80, 80]) 
     mask = cv2.inRange(frame, lower, higher)
 
     # Detectando la línea
