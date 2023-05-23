@@ -41,19 +41,3 @@ def right():
 
     GPIO.output(MotorIN1,GPIO.LOW)
     GPIO.output(MotorIN3,GPIO.HIGH)
-
-while True:
-    foward()
-    print('ADELANTE')
-    sleep(5)
-    backward()
-    print('ATRAS')
-    sleep(5)
-    right()
-    print('DERECHA')
-    sleep(5)
-    left()
-    print('IZQUIERDA')
-    sleep(5)
-
-GPIO.cleanup()
