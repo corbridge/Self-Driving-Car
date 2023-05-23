@@ -3,11 +3,11 @@ from time import sleep
 
 GPIO.setmode(GPIO.BCM)
 
-MotorIN1 = 2
-MotorIN2 = 3
+MotorIN1 = 12
+MotorIN2 = 13
 
-MotorIN3 = 17
-MotorIN4 = 27
+MotorIN3 = 18
+MotorIN4 = 19
 
 GPIO.setup(MotorIN1,GPIO.OUT)
 GPIO.setup(MotorIN2,GPIO.OUT)
