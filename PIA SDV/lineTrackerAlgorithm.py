@@ -11,21 +11,23 @@ def distance_from_center(frame):
 
     # Detectando la línea
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    try:
+        # Encontrando el punto medio de la línea
+        biggest_contour = max(contours, key = cv2.contourArea)
+        M = cv2.moments(biggest_contour)
 
-    # Encontrando el punto medio de la línea
-    biggest_contour = max(contours, key = cv2.contourArea)
-    M = cv2.moments(biggest_contour)
+        if M["m00"] != 0:
+            cx = int(M["m10"] / M["m00"])
+            cy = int(M["m01"] / M["m00"])
+        else:
+            cx, cy = 0, 0
 
-    if M["m00"] != 0:
-        cx = int(M["m10"] / M["m00"])
-        cy = int(M["m01"] / M["m00"])
-    else:
-        cx, cy = 0, 0
+        ancho = frame.shape[1]
+        cx_cam = int(ancho/2)
 
-    ancho = frame.shape[1]
-    cx_cam = int(ancho/2)
+        # Calculando distancia del centro de la camara hacia la línea
+        distancia = cx - cx_cam
 
-    # Calculando distancia del centro de la camara hacia la línea
-    distancia = cx - cx_cam
-
-    return distancia
+        return distancia
+    except:
+        return 0
